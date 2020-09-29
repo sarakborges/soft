@@ -1,6 +1,7 @@
-// React
+// Dependencies
 import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 // Constants
 import ROUTES from 'consts';
@@ -12,9 +13,19 @@ import { AppContext } from 'Contexts/app';
 import UserAPI from 'Apis/user';
 
 // Components
+import Field from 'Components/Field';
+import Button from 'Components/Button';
 
 // Styles
-import {} from './style';
+import {
+  FormWrapper,
+  Form,
+  FieldItem,
+  PasswordField,
+  TogglePassword,
+} from './style';
+import { faLock, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Container Login
 const Login = () => {
@@ -23,9 +34,11 @@ const Login = () => {
   const [loginData, setLoginData] = useState<{
     user: string;
     pass: string;
+    showPass: boolean;
   }>({
     user: '',
     pass: '',
+    showPass: false,
   });
 
   // Functions
@@ -51,44 +64,93 @@ const Login = () => {
       {state.isAuthed && <Redirect to={ROUTES.HOME.url} />}
 
       {!state.isAuthed && (
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            doLogin(loginData.user, loginData.pass);
-          }}
-        >
-          <input
-            type="text"
-            name="user"
-            onChange={e => {
-              e.persist();
-
-              setLoginData(prevState => {
-                return {
-                  ...prevState,
-                  user: e.target.value,
-                };
-              });
+        <FormWrapper>
+          <Form
+            onSubmit={e => {
+              e.preventDefault();
+              doLogin(loginData.user, loginData.pass);
             }}
-          />
+          >
+            <FieldItem>
+              <Field
+                label={faUser}
+                name="user"
+                placeholder="Digite seu usuário aqui"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  e.persist();
 
-          <input
-            type="password"
-            name="pass"
-            onChange={e => {
-              e.persist();
+                  setLoginData(prevState => {
+                    return {
+                      ...prevState,
+                      user: e.target.value,
+                    };
+                  });
+                }}
+              />
+            </FieldItem>
 
-              setLoginData(prevState => {
-                return {
-                  ...prevState,
-                  pass: e.target.value,
-                };
-              });
-            }}
-          />
+            <FieldItem>
+              <PasswordField>
+                {!loginData.showPass && (
+                  <Field
+                    label={faLock}
+                    name="pass"
+                    type="password"
+                    placeholder="Digite sua senha aqui"
+                    value={loginData.pass}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      e.persist();
 
-          <button type="submit">Login</button>
-        </form>
+                      setLoginData(prevState => {
+                        return {
+                          ...prevState,
+                          pass: e.target.value,
+                        };
+                      });
+                    }}
+                  />
+                )}
+
+                {!!loginData.showPass && (
+                  <Field
+                    label={faLock}
+                    name="pass"
+                    placeholder="Digite sua senha aqui"
+                    value={loginData.pass}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      e.persist();
+
+                      setLoginData(prevState => {
+                        return {
+                          ...prevState,
+                          pass: e.target.value,
+                        };
+                      });
+                    }}
+                  />
+                )}
+
+                <TogglePassword>
+                  <FontAwesomeIcon
+                    icon={!!loginData.showPass ? faEyeSlash : faEye}
+                    onClick={() => {
+                      setLoginData(prevState => {
+                        return {
+                          ...prevState,
+                          showPass: !prevState.showPass,
+                        };
+                      });
+                    }}
+                  />
+                </TogglePassword>
+              </PasswordField>
+            </FieldItem>
+
+            <FieldItem>
+              <Button type="submit">Login</Button>
+            </FieldItem>
+          </Form>
+        </FormWrapper>
       )}
     </>
   );
