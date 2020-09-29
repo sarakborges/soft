@@ -20,7 +20,7 @@ export const Form = styled.form`
   padding: 30px;
   margin: auto;
 
-  border-radius: 12px;
+  border-radius: ${Theme.borderRadius};
   background: ${Theme.light};
 `;
 

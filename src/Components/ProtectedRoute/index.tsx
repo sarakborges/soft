@@ -1,4 +1,4 @@
-// React
+// Dependencies
 import React, { FC, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 

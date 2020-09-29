@@ -1,4 +1,4 @@
-// React
+// Dependencies
 import React, { useReducer, createContext, useEffect } from 'react';
 
 // Type

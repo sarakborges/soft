@@ -1,4 +1,4 @@
-// React
+// Dependencies
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -13,13 +13,13 @@ import ProtectedRoute from 'Components/ProtectedRoute';
 
 // Containers
 import Login from 'Containers/Login';
-import Home from 'Containers/Home';
+import BooksList from 'Containers/BooksList';
 
 const Routes = () => (
   <Router>
     <AppProvider>
       <Switch>
-        <ProtectedRoute path={ROUTES.HOME.url} component={Home} exact />
+        <ProtectedRoute path={ROUTES.HOME.url} component={BooksList} exact />
 
         <Route path={ROUTES.LOGIN.url} component={Login} exact />
       </Switch>

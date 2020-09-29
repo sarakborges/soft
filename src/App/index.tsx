@@ -1,18 +1,18 @@
-// React
-import React from "react";
+// Dependencies
+import React from 'react';
 
 // Context
-import { AppProvider } from "Contexts/app";
+import { AppProvider } from 'Contexts/app';
 
 // Components
-import Container from "Components/Container";
+import Container from 'Components/Container';
 
 // Routes
-import Routes from "routes";
+import Routes from 'routes';
 
 // Styles
-import "reset.css";
-import { GlobalStyle } from "./style";
+import 'reset.css';
+import { GlobalStyle } from './style';
 
 // App
 const App = () => {

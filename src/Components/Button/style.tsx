@@ -10,7 +10,7 @@ export const ButtonStyle = styled.button<Props>`
   display: block;
 
   border: none;
-  border-radius: 12px;
+  border-radius: ${Theme.borderRadius};
   background: ${props => (props.inverted ? Theme.light : Theme.dark)};
 
   width: ${props => (props.fullWidth ? '100%' : 'auto')};

@@ -8,7 +8,7 @@ export const FieldWrapper = styled.div`
   width: 100%;
   overflow: hidden;
 
-  border-radius: 12px;
+  border-radius: ${Theme.borderRadius};
 `;
 
 export const FieldStyle = styled.input`
@@ -21,7 +21,7 @@ export const FieldStyle = styled.input`
 
   border: 2px solid transparent;
   border-left: none;
-  border-radius: 0 12px 12px 0;
+  border-radius: 0 ${Theme.borderRadius} ${Theme.borderRadius} 0;
   background: ${Theme.lightish};
 
   transition: border-color 0.3s;
