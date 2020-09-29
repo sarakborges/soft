@@ -9,10 +9,11 @@ export const LogoutArea = styled.div`
   z-index: 9;
 
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   width: 100%;
-  padding: 30px 0;
+  padding: 15px 0;
 
   background: ${Theme.dark};
 `;
