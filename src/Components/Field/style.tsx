@@ -13,6 +13,7 @@ export const FieldWrapper = styled.div`
 
 export const FieldStyle = styled.input`
   flex: 1;
+  max-width: calc(100% - 50px);
   height: 50px;
   padding: 0 15px;
 
