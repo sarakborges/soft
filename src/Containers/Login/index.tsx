@@ -76,6 +76,7 @@ const Login = () => {
                 label={faUser}
                 name="user"
                 placeholder="Digite seu usuário aqui"
+                value={loginData.user}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   e.persist();
 
@@ -91,56 +92,36 @@ const Login = () => {
 
             <FieldItem>
               <PasswordField>
-                {!loginData.showPass && (
-                  <Field
-                    label={faLock}
-                    name="pass"
-                    type="password"
-                    placeholder="Digite sua senha aqui"
-                    value={loginData.pass}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      e.persist();
+                <Field
+                  label={faLock}
+                  type={!!loginData.showPass ? 'text' : 'password'}
+                  name="pass"
+                  placeholder="Digite sua senha aqui"
+                  value={loginData.pass}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    e.persist();
 
-                      setLoginData(prevState => {
-                        return {
-                          ...prevState,
-                          pass: e.target.value,
-                        };
-                      });
-                    }}
-                  />
-                )}
+                    setLoginData(prevState => {
+                      return {
+                        ...prevState,
+                        pass: e.target.value,
+                      };
+                    });
+                  }}
+                />
 
-                {!!loginData.showPass && (
-                  <Field
-                    label={faLock}
-                    name="pass"
-                    placeholder="Digite sua senha aqui"
-                    value={loginData.pass}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      e.persist();
-
-                      setLoginData(prevState => {
-                        return {
-                          ...prevState,
-                          pass: e.target.value,
-                        };
-                      });
-                    }}
-                  />
-                )}
-
-                <TogglePassword>
+                <TogglePassword
+                  onClick={() => {
+                    setLoginData(prevState => {
+                      return {
+                        ...prevState,
+                        showPass: !prevState.showPass,
+                      };
+                    });
+                  }}
+                >
                   <FontAwesomeIcon
                     icon={!!loginData.showPass ? faEyeSlash : faEye}
-                    onClick={() => {
-                      setLoginData(prevState => {
-                        return {
-                          ...prevState,
-                          showPass: !prevState.showPass,
-                        };
-                      });
-                    }}
                   />
                 </TogglePassword>
               </PasswordField>
