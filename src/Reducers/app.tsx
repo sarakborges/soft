@@ -8,6 +8,7 @@ export const AppReducer = (state: App, action: Action) => {
         'loginInfo',
         JSON.stringify({
           token: action.data.token,
+          user: action.data.user,
         }),
       );
 

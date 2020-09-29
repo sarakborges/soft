@@ -52,6 +52,7 @@ const Login = () => {
           data: {
             isAuthed: true,
             token: loginInfo.token,
+            user: loginInfo.user,
           },
         });
       }
@@ -128,7 +129,9 @@ const Login = () => {
             </FieldItem>
 
             <FieldItem>
-              <Button type="submit">Login</Button>
+              <Button type="submit" fullWidth>
+                Login
+              </Button>
             </FieldItem>
           </Form>
         </FormWrapper>

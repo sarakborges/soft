@@ -2,19 +2,23 @@ import styled from 'styled-components';
 
 import Theme from 'theme';
 
-export const ButtonStyle = styled.button`
+interface Props {
+  inverted: boolean;
+  fullWidth: boolean;
+}
+export const ButtonStyle = styled.button<Props>`
   display: block;
 
   border: none;
   border-radius: 12px;
-  background: ${Theme.dark};
+  background: ${props => (props.inverted ? Theme.light : Theme.dark)};
 
-  width: 100%;
+  width: ${props => (props.fullWidth ? '100%' : 'auto')};
   height: 50px;
-  padding: 0;
+  padding: 0 30px;
   margin: 0;
 
-  color: ${Theme.light};
+  color: ${props => (props.inverted ? Theme.dark : Theme.light)};
   font-size: 18px;
 
   cursor: pointer;

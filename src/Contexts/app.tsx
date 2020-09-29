@@ -13,6 +13,7 @@ import { AppReducer } from 'Reducers/app';
 const initialState: App = {
   isAuthed: false,
   token: '',
+  user: undefined,
 };
 
 const AppContext = createContext<{
@@ -37,6 +38,7 @@ const AppProvider = ({ children }: any) => {
         data: {
           isAuthed: true,
           token: loginInfo.token,
+          user: loginInfo.user,
         },
       });
     }

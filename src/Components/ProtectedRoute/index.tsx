@@ -8,6 +8,12 @@ import ROUTES from 'consts';
 // Context
 import { AppContext } from 'Contexts/app';
 
+// Components
+import Button from 'Components/Button';
+
+// Styles
+import { LogoutArea, WelcomeMessage } from './style';
+
 const ProtectedRoute = ({
   component,
   path,
@@ -19,21 +25,25 @@ const ProtectedRoute = ({
   exact: boolean;
 }) => {
   const { state, dispatch } = useContext(AppContext);
-  const { isAuthed } = state;
+  const { isAuthed, user } = state;
 
   return isAuthed === true ? (
     <>
-      <button
-        type="button"
-        onClick={() => {
-          dispatch({
-            type: 'DO_LOGOUT',
-            data: null,
-          });
-        }}
-      >
-        Logout
-      </button>
+      <LogoutArea>
+        <WelcomeMessage>Olá, {user?.name || 'usuário'}!</WelcomeMessage>
+
+        <Button
+          inverted
+          onClick={() => {
+            dispatch({
+              type: 'DO_LOGOUT',
+              data: null,
+            });
+          }}
+        >
+          Logout
+        </Button>
+      </LogoutArea>
 
       <Route path={path} component={component} exact={exact} {...rest} />
     </>
