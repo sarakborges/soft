@@ -4,27 +4,36 @@ import React, { useContext } from 'react';
 // Contexts
 import { BooksListContext } from 'Contexts/booksList';
 
+// Components
+import Button from 'Components/Button';
+
 // Styles
-import {} from './style';
+import { PaginationWrapper, PaginationItem } from './style';
 
 // Component Pagination
 const PageItem = ({ item, children }: { item: number; children: any }) => {
   // Attributes
-  const { dispatch } = useContext(BooksListContext);
+  const { state, dispatch } = useContext(BooksListContext);
+  const { currentPage } = state;
+
+  const isCurrent = currentPage === item;
 
   // DOM
   return (
-    <li
-      onClick={() => {
-        dispatch({
-          type: 'SET_CURRENT_PAGE',
-          data: item,
-        });
-      }}
-      className="page_item"
-    >
-      {children}
-    </li>
+    <PaginationItem currentItem={!!isCurrent}>
+      <Button
+        square
+        disabled={!!isCurrent}
+        onClick={() => {
+          dispatch({
+            type: 'SET_CURRENT_PAGE',
+            data: item,
+          });
+        }}
+      >
+        {children}
+      </Button>
+    </PaginationItem>
   );
 };
 
@@ -35,14 +44,14 @@ const Pagination = () => {
 
   // DOM
   return (
-    <ul className="pagination">
+    <PaginationWrapper className="pagination">
       {currentPage > 1 && <PageItem item={1}>1</PageItem>}
 
       {currentPage - 1 > 1 && (
         <PageItem item={currentPage - 1}>{currentPage - 1}</PageItem>
       )}
 
-      <li className="page_item">{currentPage}</li>
+      <PageItem item={currentPage}>{currentPage}</PageItem>
 
       {currentPage + 1 < totalPages && (
         <PageItem item={currentPage + 1}>{currentPage + 1}</PageItem>
@@ -51,7 +60,7 @@ const Pagination = () => {
       {currentPage < totalPages && (
         <PageItem item={totalPages}>{totalPages}</PageItem>
       )}
-    </ul>
+    </PaginationWrapper>
   );
 };
 

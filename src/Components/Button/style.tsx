@@ -5,6 +5,7 @@ import Theme from 'theme';
 interface Props {
   inverted: boolean;
   fullWidth: boolean;
+  square: boolean;
 }
 export const ButtonStyle = styled.button<Props>`
   display: block;
@@ -13,9 +14,10 @@ export const ButtonStyle = styled.button<Props>`
   border-radius: ${Theme.borderRadius};
   background: ${props => (props.inverted ? Theme.light : Theme.main)};
 
-  width: ${props => (props.fullWidth ? '100%' : 'auto')};
+  width: ${props =>
+    props.fullWidth ? '100%' : props.square ? '50px' : 'auto'};
   height: 50px;
-  padding: 0 30px;
+  padding: ${props => (props.square ? '0' : '0 30px')};
   margin: 0;
 
   color: ${props => (props.inverted ? Theme.main : Theme.light)};
@@ -24,6 +26,12 @@ export const ButtonStyle = styled.button<Props>`
   cursor: pointer;
 
   transition: color 0.3s, background 0.3s;
+
+  &:disabled {
+    border-color: ${Theme.lightgray};
+    background: ${Theme.lightgray};
+    color: ${props => (props.inverted ? Theme.lightgray : Theme.dark)};
+  }
 
   &:hover {
     background: ${props => (props.inverted ? Theme.main : Theme.light)};
