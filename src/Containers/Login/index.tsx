@@ -20,6 +20,7 @@ import Button from 'Components/Button';
 import {
   FormWrapper,
   Form,
+  LoginTitle,
   FieldItem,
   PasswordField,
   TogglePassword,
@@ -72,6 +73,8 @@ const Login = () => {
               doLogin(loginData.user, loginData.pass);
             }}
           >
+            <LoginTitle>Faça seu login para começar!</LoginTitle>
+
             <FieldItem>
               <Field
                 label={faUser}

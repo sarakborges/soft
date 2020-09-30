@@ -33,7 +33,6 @@ const ProtectedRoute = ({
         <WelcomeMessage>Olá, {user?.name || 'usuário'}!</WelcomeMessage>
 
         <Button
-          inverted
           onClick={() => {
             dispatch({
               type: 'DO_LOGOUT',

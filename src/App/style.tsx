@@ -1,13 +1,13 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
-import Theme from "theme";
+import Theme from 'theme';
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    background-color: ${Theme.dark};
+    background-color: ${Theme.lightish};
 
     font-family: ${Theme.mainfont};
     font-size: 14px;
-    color: ${Theme.light};
+    color: ${Theme.main};
   }
 `;

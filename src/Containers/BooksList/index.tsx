@@ -1,17 +1,16 @@
 // Dependencies
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 // Constants
 
 // Context
+import { BooksProvider, BooksContext } from 'Contexts/books';
 
 // APIS
 import BookAPI from 'Apis/book';
 
-// Interfaces
-import { Book } from 'Interfaces/book';
-
 // Components
+import Pagination from 'Components/Pagination';
 
 // Styles
 import {
@@ -25,33 +24,42 @@ import {
 // Container BooksList
 const BooksList = () => {
   // Attributes
-  const [booksList, setBooksList] = useState<Array<Book>>([]);
-  const [hasRequested, sethasRequested] = useState<boolean>(false);
+  const [hasRequested, setHasRequested] = useState<boolean>(false);
+  const { state, dispatch } = useContext(BooksContext);
+  const { currentPage, results } = state;
 
   // Functions
-  const getBooksList = async (page: number) => {
-    const booksListRequest = await BookAPI.getBooks(page);
+  const getBooksList = useCallback(
+    async (page: number) => {
+      const booksListRequest = await BookAPI.getBooks(page);
 
-    if (!!booksListRequest) {
-      setBooksList(() => booksListRequest);
-    }
+      if (!!booksListRequest) {
+        dispatch({
+          type: 'GET_BOOKS',
+          data: {
+            ...booksListRequest,
+          },
+        });
+      }
 
-    sethasRequested(() => true);
-  };
+      setHasRequested(() => true);
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
-    getBooksList(1);
-  }, []);
+    getBooksList(currentPage);
+  }, [currentPage, getBooksList]);
 
   // DOM
   return (
     <BooksListStyle>
-      {booksList.length > 0 && (
+      {results.length > 0 && (
         <>
           <BooksListTitle>Encontre seu livro favorito aqui!</BooksListTitle>
 
           <BooksListWrapper>
-            {booksList.map(bookItem => {
+            {results.map(bookItem => {
               return (
                 <BooksListItem key={`book-item-${bookItem.id}`}>
                   <BookTitle>{bookItem.name}</BookTitle>
@@ -59,18 +67,28 @@ const BooksList = () => {
               );
             })}
           </BooksListWrapper>
+
+          <Pagination />
         </>
       )}
 
-      {booksList.length < 1 && hasRequested && (
+      {results.length < 1 && hasRequested && (
         <BooksListTitle>Nenhum livro encontrado.</BooksListTitle>
       )}
 
-      {booksList.length < 1 && !hasRequested && (
+      {results.length < 1 && !hasRequested && (
         <BooksListTitle>Aguarde enquanto buscamos os livros!</BooksListTitle>
       )}
     </BooksListStyle>
   );
 };
 
-export default BooksList;
+const BookList = () => {
+  return (
+    <BooksProvider>
+      <BooksList />
+    </BooksProvider>
+  );
+};
+
+export default BookList;

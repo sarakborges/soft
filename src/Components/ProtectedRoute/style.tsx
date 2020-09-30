@@ -15,7 +15,7 @@ export const LogoutArea = styled.div`
   width: 100%;
   padding: 15px 0;
 
-  background: ${Theme.dark};
+  background: ${Theme.lightish};
 `;
 
 export const WelcomeMessage = styled.div`

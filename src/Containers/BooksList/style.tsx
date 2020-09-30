@@ -21,7 +21,7 @@ export const BooksListWrapper = styled.ul`
 export const BooksListItem = styled.li`
   padding: 10px 0;
 
-  color: ${Theme.dark};
+  color: ${Theme.main};
 
   &:not(:last-of-type) {
     border-bottom: 1px solid ${Theme.lightgray};

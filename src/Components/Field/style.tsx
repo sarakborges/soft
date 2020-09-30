@@ -18,16 +18,17 @@ export const FieldStyle = styled.input`
   padding: 0 15px;
 
   font-size: 18px;
+  color: ${Theme.main};
 
   border: 2px solid transparent;
   border-left: none;
   border-radius: 0 ${Theme.borderRadius} ${Theme.borderRadius} 0;
-  background: ${Theme.lightish};
+  background: ${Theme.light};
 
   transition: border-color 0.3s;
 
   &:focus {
-    border-color: ${Theme.dark};
+    border-color: ${Theme.main};
   }
 `;
 
@@ -41,5 +42,5 @@ export const Label = styled.label`
   font-size: 20px;
   color: ${Theme.light};
 
-  background: ${Theme.dark};
+  background: ${Theme.main};
 `;

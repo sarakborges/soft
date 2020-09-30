@@ -13,7 +13,6 @@ export const FormWrapper = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  flex: 1;
 
   width: 500px;
   max-width: 100%;
@@ -21,7 +20,11 @@ export const Form = styled.form`
   margin: auto;
 
   border-radius: ${Theme.borderRadius};
-  background: ${Theme.light};
+`;
+
+export const LoginTitle = styled.div`
+  font-size: 24px;
+  text-align: center;
 `;
 
 export const FieldItem = styled.div`
@@ -52,7 +55,7 @@ export const TogglePassword = styled.div`
   width: 50px;
 
   font-size: 20px;
-  color: ${Theme.dark};
+  color: ${Theme.main};
 
   cursor: pointer;
 `;
