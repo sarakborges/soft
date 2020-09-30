@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 
 // Contexts
-import { BooksContext } from 'Contexts/books';
+import { BooksListContext } from 'Contexts/booksList';
 
 // Styles
 import {} from './style';
@@ -10,7 +10,7 @@ import {} from './style';
 // Component Pagination
 const PageItem = ({ item, children }: { item: number; children: any }) => {
   // Attributes
-  const { dispatch } = useContext(BooksContext);
+  const { dispatch } = useContext(BooksListContext);
 
   // DOM
   return (
@@ -30,7 +30,7 @@ const PageItem = ({ item, children }: { item: number; children: any }) => {
 
 const Pagination = () => {
   // Attributes
-  const { state } = useContext(BooksContext);
+  const { state } = useContext(BooksListContext);
   const { currentPage, totalPages } = state;
 
   // DOM

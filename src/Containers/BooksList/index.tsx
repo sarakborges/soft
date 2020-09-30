@@ -4,7 +4,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 // Constants
 
 // Context
-import { BooksProvider, BooksContext } from 'Contexts/books';
+import { BooksListProvider, BooksListContext } from 'Contexts/booksList';
 
 // APIS
 import BookAPI from 'Apis/book';
@@ -25,7 +25,7 @@ import {
 const BooksList = () => {
   // Attributes
   const [hasRequested, setHasRequested] = useState<boolean>(false);
-  const { state, dispatch } = useContext(BooksContext);
+  const { state, dispatch } = useContext(BooksListContext);
   const { currentPage, results } = state;
 
   // Functions
@@ -85,9 +85,9 @@ const BooksList = () => {
 
 const BookList = () => {
   return (
-    <BooksProvider>
+    <BooksListProvider>
       <BooksList />
-    </BooksProvider>
+    </BooksListProvider>
   );
 };
 

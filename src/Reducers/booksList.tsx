@@ -1,7 +1,7 @@
-import { Books } from 'Interfaces/booksResults';
+import { BooksList } from 'Interfaces/booksList';
 import { Action } from 'Types/action';
 
-export const BooksReducer = (state: Books, action: Action) => {
+export const BooksListReducer = (state: BooksList, action: Action) => {
   switch (action.type) {
     case 'GET_BOOKS': {
       return { ...state, ...action.data };
@@ -12,7 +12,9 @@ export const BooksReducer = (state: Books, action: Action) => {
     }
 
     default: {
-      throw new Error(`Unknown type ${action.type} reducer on BooksReducer`);
+      throw new Error(
+        `Unknown type ${action.type} reducer on BooksListReducer`,
+      );
     }
   }
 };
