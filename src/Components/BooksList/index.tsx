@@ -1,5 +1,6 @@
 // Dependencies
 import React, { useCallback, useContext, useEffect } from 'react';
+import { faHandHolding, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // Constants
 import { pageSize } from 'consts';
@@ -13,7 +14,7 @@ import BookAPI from 'Apis/book';
 // Components
 import PageTitle from 'Components/PageTitle';
 import Pagination from 'Components/Pagination';
-import Button from 'Components/Button';
+import IconButton from 'Components/IconButton';
 
 // Styles
 import {
@@ -63,6 +64,14 @@ const BooksList = () => {
     }
   };
 
+  const toggleRentItem = (id: number | undefined) => {
+    if (!!id) {
+      BookAPI.toggleRentBook(id);
+
+      getBooksList(currentPage, filter, pageSize);
+    }
+  };
+
   useEffect(
     useCallback(() => {
       dispatch({
@@ -92,13 +101,24 @@ const BooksList = () => {
               <BookTitle>{bookItem?.name}</BookTitle>
 
               <BookOptions>
-                <Button
+                <IconButton
+                  icon={faHandHolding}
+                  onClick={() => {
+                    toggleRentItem(bookItem?.id);
+                  }}
+                >
+                  {bookItem?.isRented ? 'Devolver' : 'Alugar'}
+                </IconButton>
+
+                <IconButton
+                  icon={faTimes}
+                  disabled={bookItem?.isRented}
                   onClick={() => {
                     deleteItem(bookItem?.id);
                   }}
                 >
                   Excluir
-                </Button>
+                </IconButton>
               </BookOptions>
             </BooksListItem>
           );

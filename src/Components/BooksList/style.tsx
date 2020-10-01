@@ -31,4 +31,8 @@ export const BookTitle = styled.div`
 export const BookOptions = styled.div`
   display: flex;
   align-items: center;
+
+  > button:not(:last-of-type) {
+    margin-right: 10px;
+  }
 `;

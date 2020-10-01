@@ -1,7 +1,10 @@
+// Dependencies
 import React from 'react';
 
+// Styles
 import { ButtonStyle } from './style';
 
+// Component Button
 const Button = ({
   children,
   type,

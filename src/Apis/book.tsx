@@ -6,11 +6,11 @@ import { booksMock } from 'consts';
 
 const getBooks = async ({
   currentPage,
-  pageSize = 5,
+  pageSize,
   filter,
 }: {
   currentPage: number;
-  pageSize?: number;
+  pageSize: number;
   filter?: string;
 }) => {
   const minCount = currentPage * pageSize - pageSize;
@@ -58,9 +58,18 @@ const deleteBook = async (id: number) => {
   });
 };
 
+const toggleRentBook = async (id: number) => {
+  const book = booksMock.flat().find(bookItem => bookItem.id === id);
+
+  if (!!book) {
+    book.isRented = !book.isRented;
+  }
+};
+
 const BookAPI = {
   getBooks,
   deleteBook,
+  toggleRentBook,
 };
 
 export default BookAPI;
