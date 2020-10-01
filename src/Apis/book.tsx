@@ -1,6 +1,14 @@
 import { Book } from 'Interfaces/book';
 
-const getBooks = async (page: number, filter?: string) => {
+const getBooks = async ({
+  currentPage,
+  pageSize = 5,
+  filter,
+}: {
+  currentPage: number;
+  pageSize?: number;
+  filter?: string;
+}) => {
   const booksMock: Array<Book> = [
     {
       id: 1,
@@ -64,19 +72,23 @@ const getBooks = async (page: number, filter?: string) => {
   ];
 
   const booksFiltered: Array<Book | undefined> = !!filter
-    ? booksMock.filter(bookItem => !!filter && bookItem.name.includes(filter))
+    ? booksMock.filter(
+        bookItem =>
+          !!filter && bookItem.name.toLocaleLowerCase().includes(filter.trim()),
+      )
     : booksMock;
 
   const finalBooks: Array<Book | undefined> = booksFiltered.filter(
     (bookItem, bookItemKey) =>
-      bookItemKey >= page * 5 - 5 && bookItemKey < page * 5,
+      bookItemKey >= currentPage * pageSize - pageSize &&
+      bookItemKey < currentPage * pageSize,
   );
 
   const booksList: {
     totalPages: number;
     results: Array<Book | undefined>;
   } = {
-    totalPages: Math.ceil(booksFiltered.length / 5),
+    totalPages: Math.ceil(booksFiltered.length / pageSize),
     results: finalBooks,
   };
 

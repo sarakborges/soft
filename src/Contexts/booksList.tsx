@@ -14,6 +14,7 @@ const initialState: BooksList = {
   currentPage: 1,
   totalPages: 1,
   results: [],
+  filter: '',
 };
 
 const BooksListContext = createContext<{

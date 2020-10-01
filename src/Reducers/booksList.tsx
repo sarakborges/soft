@@ -11,6 +11,10 @@ export const BooksListReducer = (state: BooksList, action: Action) => {
       return { ...state, currentPage: action.data };
     }
 
+    case 'SET_FILTER': {
+      return { ...state, filter: action.data };
+    }
+
     default: {
       throw new Error(
         `Unknown type ${action.type} reducer on BooksListReducer`,

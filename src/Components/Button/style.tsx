@@ -27,15 +27,17 @@ export const ButtonStyle = styled.button<Props>`
 
   transition: color 0.3s, background 0.3s;
 
-  &:disabled {
-    border-color: ${Theme.lightgray};
-    background: ${Theme.lightgray};
-    color: ${props => (props.inverted ? Theme.lightgray : Theme.dark)};
-  }
-
   &:hover {
     background: ${props => (props.inverted ? Theme.main : Theme.light)};
 
     color: ${props => (props.inverted ? Theme.light : Theme.main)};
+  }
+
+  &:disabled {
+    border-color: ${Theme.lightgray};
+    background: ${Theme.lightgray};
+    color: ${props => (props.inverted ? Theme.lightgray : Theme.dark)};
+
+    cursor: default;
   }
 `;

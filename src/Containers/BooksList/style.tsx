@@ -10,6 +10,10 @@ export const BooksListTitle = styled.div`
   font-size: 20px;
 `;
 
+export const BooksListFilter = styled.div`
+  padding: 15px 0 30px;
+`;
+
 export const BooksListWrapper = styled.ul`
   margin-top: 15px;
   padding: 5px 15px;
