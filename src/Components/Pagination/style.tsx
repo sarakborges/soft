@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import Theme from 'theme';
-
 export const PaginationWrapper = styled.ul`
   display: flex;
   align-items: center;

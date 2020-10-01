@@ -26,7 +26,7 @@ const BooksList = () => {
   // Attributes
   const [hasRequested, setHasRequested] = useState<boolean>(false);
   const { state, dispatch } = useContext(BooksListContext);
-  const { currentPage, results } = state;
+  const { currentPage, totalPages, results } = state;
 
   // Functions
   const getBooksList = useCallback(
@@ -61,14 +61,14 @@ const BooksList = () => {
           <BooksListWrapper>
             {results.map(bookItem => {
               return (
-                <BooksListItem key={`book-item-${bookItem.id}`}>
-                  <BookTitle>{bookItem.name}</BookTitle>
+                <BooksListItem key={`book-item-${bookItem?.id}`}>
+                  <BookTitle>{bookItem?.name}</BookTitle>
                 </BooksListItem>
               );
             })}
           </BooksListWrapper>
 
-          <Pagination />
+          {totalPages > 1 && <Pagination />}
         </>
       )}
 

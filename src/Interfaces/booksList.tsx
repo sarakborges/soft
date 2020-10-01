@@ -3,5 +3,5 @@ import { Book } from 'Interfaces/book';
 export interface BooksList {
   currentPage: number;
   totalPages: number;
-  results: Array<Book>;
+  results: Array<Book | undefined>;
 }

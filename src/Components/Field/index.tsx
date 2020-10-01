@@ -9,7 +9,6 @@ import { FieldWrapper, Label, FieldStyle } from './style';
 // Component Field
 const Field = ({
   placeholder,
-  classes,
   value,
   type,
   label,
@@ -17,7 +16,6 @@ const Field = ({
   onChange,
 }: {
   placeholder?: string;
-  classes?: Array<string>;
   value?: string;
   type?: string;
   label?: IconProp;
@@ -41,7 +39,6 @@ const Field = ({
           id={name}
           type={type || 'text'}
           placeholder={placeholder || 'Digite aqui'}
-          className={classes ? ['input', ...classes].join(' ') : 'input'}
           value={value}
           onChange={onChange}
         />

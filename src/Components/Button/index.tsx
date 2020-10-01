@@ -5,7 +5,6 @@ import { ButtonStyle } from './style';
 const Button = ({
   children,
   type,
-  classes,
   disabled,
   onClick,
   inverted,
@@ -14,7 +13,6 @@ const Button = ({
 }: {
   children: any;
   type?: 'button' | 'submit';
-  classes?: Array<string>;
   disabled?: boolean;
   onClick?: any;
   inverted?: boolean;
@@ -29,7 +27,6 @@ const Button = ({
         inverted={!!inverted}
         fullWidth={!!fullWidth}
         square={!!square}
-        className={classes ? ['button', ...classes].join(' ') : 'button'}
         onClick={onClick}
       >
         {children}
