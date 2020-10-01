@@ -7,7 +7,6 @@ import ROUTES from 'consts';
 
 // Context
 import { LoginContext } from 'Contexts/login';
-import { BooksListProvider } from 'Contexts/booksList';
 
 // Components
 import Button from 'Components/Button';
@@ -28,29 +27,33 @@ const ProtectedRoute = ({
   const { state, dispatch } = useContext(LoginContext);
   const { isAuthed, user } = state;
 
-  return isAuthed === true ? (
+  return (
     <>
-      <LogoutArea>
-        <WelcomeMessage>Olá, {user?.name || 'usuário'}!</WelcomeMessage>
+      {typeof isAuthed !== 'undefined' && isAuthed === true && (
+        <>
+          <LogoutArea>
+            <WelcomeMessage>Olá, {user?.name || 'usuário'}!</WelcomeMessage>
 
-        <Button
-          onClick={() => {
-            dispatch({
-              type: 'DO_LOGOUT',
-              data: null,
-            });
-          }}
-        >
-          Logout
-        </Button>
-      </LogoutArea>
+            <Button
+              onClick={() => {
+                dispatch({
+                  type: 'DO_LOGOUT',
+                  data: null,
+                });
+              }}
+            >
+              Logout
+            </Button>
+          </LogoutArea>
 
-      <BooksListProvider>
-        <Route path={path} component={component} exact={exact} {...rest} />
-      </BooksListProvider>
+          <Route path={path} component={component} exact={exact} {...rest} />
+        </>
+      )}
+
+      {typeof isAuthed !== 'undefined' && isAuthed !== true && (
+        <Redirect to={ROUTES.LOGIN.url} />
+      )}
     </>
-  ) : (
-    <Redirect to={ROUTES.LOGIN.url} />
   );
 };
 

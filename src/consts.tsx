@@ -72,6 +72,14 @@ const ROUTES = {
   LOGIN: {
     url: '/login',
   },
+
+  CREATE: {
+    url: '/create',
+  },
+
+  EDIT: {
+    url: '/edit/:id',
+  },
 };
 
 export default ROUTES;

@@ -1,9 +1,14 @@
 // Dependencies
 import React, { useCallback, useContext, useEffect } from 'react';
-import { faHandHolding, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import {
+  faHandHolding,
+  faPencilAlt,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 
 // Constants
-import { pageSize } from 'consts';
+import ROUTES, { pageSize } from 'consts';
 
 // Context
 import { BooksListContext } from 'Contexts/booksList';
@@ -108,6 +113,12 @@ const BooksList = () => {
                   }}
                 >
                   {bookItem?.isRented ? 'Devolver' : 'Alugar'}
+                </IconButton>
+
+                <IconButton icon={faPencilAlt} disabled={bookItem?.isRented}>
+                  <Link to={ROUTES.EDIT.url.replace(':id', `${bookItem?.id}`)}>
+                    Editar
+                  </Link>
                 </IconButton>
 
                 <IconButton

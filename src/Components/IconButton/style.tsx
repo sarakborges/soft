@@ -30,6 +30,11 @@ export const IconButtonStyle = styled.button`
 
     cursor: default;
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 export const IconButtonText = styled.span`

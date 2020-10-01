@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 // Contexts
-import { BooksListContext } from 'Contexts/booksList';
+import { BooksListContext, BooksListProvider } from 'Contexts/booksList';
 
 // Components
 import PageTitle from 'Components/PageTitle';
@@ -49,4 +49,8 @@ const Books = () => {
   );
 };
 
-export default Books;
+export default () => (
+  <BooksListProvider>
+    <Books />
+  </BooksListProvider>
+);

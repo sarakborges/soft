@@ -1,5 +1,10 @@
 // Dependencies
-import React, { useReducer, createContext, useEffect } from 'react';
+import React, {
+  useReducer,
+  createContext,
+  useEffect,
+  useCallback,
+} from 'react';
 
 // Type
 import { Action } from 'Types/action';
@@ -10,12 +15,14 @@ import { Login } from 'Interfaces/login';
 // Reducer
 import { LoginReducer } from 'Reducers/login';
 
+// InitialState
 const initialState: Login = {
-  isAuthed: false,
+  isAuthed: undefined,
   token: '',
   user: undefined,
 };
 
+// Create Context
 const LoginContext = createContext<{
   state: Login;
   dispatch: (action: Action) => void;
@@ -24,26 +31,40 @@ const LoginContext = createContext<{
   dispatch: () => null,
 });
 
+// Provider
 const LoginProvider = ({ children }: any) => {
+  // Attributes
   const [state, dispatch] = useReducer(LoginReducer, initialState);
 
-  useEffect(() => {
-    const localLoginInfo = window.localStorage.getItem('loginInfo');
+  useEffect(
+    useCallback(() => {
+      const localLoginInfo = window.localStorage.getItem('loginInfo');
 
-    if (!!localLoginInfo) {
-      const loginInfo = JSON.parse(localLoginInfo);
+      if (!!localLoginInfo) {
+        const loginInfo = JSON.parse(localLoginInfo);
 
-      dispatch({
-        type: 'DO_LOGIN',
-        data: {
-          isAuthed: true,
-          token: loginInfo.token,
-          user: loginInfo.user,
-        },
-      });
-    }
-  }, []);
+        dispatch({
+          type: 'DO_LOGIN',
+          data: {
+            isAuthed: true,
+            token: loginInfo.token,
+            user: loginInfo.user,
+          },
+        });
+      } else {
+        dispatch({
+          type: 'DO_LOGIN',
+          data: {
+            ...state,
+            isAuthed: false,
+          },
+        });
+      }
+    }, [state]),
+    [],
+  );
 
+  // DOM
   return (
     <LoginContext.Provider value={{ state, dispatch }}>
       {children}

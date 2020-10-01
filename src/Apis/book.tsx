@@ -50,6 +50,14 @@ const getBooks = async ({
   return booksList || false;
 };
 
+const editBook = async (id: number, bookInfo: Book) => {
+  const bookIndex = booksMock.flat().findIndex(bookItem => bookItem.id === id);
+
+  if (!!bookIndex) {
+    booksMock[bookIndex] = { ...bookInfo };
+  }
+};
+
 const deleteBook = async (id: number) => {
   booksMock.forEach((bookItem, bookItemIndex) => {
     if (bookItem.id === id) {
@@ -68,6 +76,7 @@ const toggleRentBook = async (id: number) => {
 
 const BookAPI = {
   getBooks,
+  editBook,
   deleteBook,
   toggleRentBook,
 };

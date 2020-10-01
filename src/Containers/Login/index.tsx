@@ -63,9 +63,11 @@ const Login = () => {
   // DOM
   return (
     <>
-      {state.isAuthed && <Redirect to={ROUTES.HOME.url} />}
+      {typeof state.isAuthed !== 'undefined' && state.isAuthed === true && (
+        <Redirect to={ROUTES.HOME.url} />
+      )}
 
-      {!state.isAuthed && (
+      {typeof state.isAuthed !== 'undefined' && state.isAuthed !== true && (
         <FormWrapper>
           <Form
             onSubmit={e => {

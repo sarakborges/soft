@@ -1,5 +1,5 @@
 export interface Login {
-  isAuthed: boolean;
+  isAuthed: boolean | undefined;
   token: string;
   user:
     | {
