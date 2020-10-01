@@ -6,7 +6,8 @@ import { Route, Redirect } from 'react-router-dom';
 import ROUTES from 'consts';
 
 // Context
-import { AppContext } from 'Contexts/app';
+import { LoginContext } from 'Contexts/login';
+import { BooksListProvider } from 'Contexts/booksList';
 
 // Components
 import Button from 'Components/Button';
@@ -24,7 +25,7 @@ const ProtectedRoute = ({
   path: string;
   exact: boolean;
 }) => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(LoginContext);
   const { isAuthed, user } = state;
 
   return isAuthed === true ? (
@@ -44,7 +45,9 @@ const ProtectedRoute = ({
         </Button>
       </LogoutArea>
 
-      <Route path={path} component={component} exact={exact} {...rest} />
+      <BooksListProvider>
+        <Route path={path} component={component} exact={exact} {...rest} />
+      </BooksListProvider>
     </>
   ) : (
     <Redirect to={ROUTES.LOGIN.url} />

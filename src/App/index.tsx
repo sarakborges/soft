@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Context
-import { AppProvider } from 'Contexts/app';
+import { LoginProvider } from 'Contexts/login';
 
 // Components
 import Container from 'Components/Container';
@@ -17,13 +17,13 @@ import { GlobalStyle } from './style';
 // App
 const App = () => {
   return (
-    <AppProvider>
+    <LoginProvider>
       <GlobalStyle />
 
       <Container>
         <Routes />
       </Container>
-    </AppProvider>
+    </LoginProvider>
   );
 };
 

@@ -5,27 +5,27 @@ import React, { useReducer, createContext, useEffect } from 'react';
 import { Action } from 'Types/action';
 
 // Interface
-import { App } from 'Interfaces/app';
+import { Login } from 'Interfaces/login';
 
 // Reducer
-import { AppReducer } from 'Reducers/app';
+import { LoginReducer } from 'Reducers/login';
 
-const initialState: App = {
+const initialState: Login = {
   isAuthed: false,
   token: '',
   user: undefined,
 };
 
-const AppContext = createContext<{
-  state: App;
+const LoginContext = createContext<{
+  state: Login;
   dispatch: (action: Action) => void;
 }>({
   state: initialState,
   dispatch: () => null,
 });
 
-const AppProvider = ({ children }: any) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+const LoginProvider = ({ children }: any) => {
+  const [state, dispatch] = useReducer(LoginReducer, initialState);
 
   useEffect(() => {
     const localLoginInfo = window.localStorage.getItem('loginInfo');
@@ -45,10 +45,10 @@ const AppProvider = ({ children }: any) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <LoginContext.Provider value={{ state, dispatch }}>
       {children}
-    </AppContext.Provider>
+    </LoginContext.Provider>
   );
 };
 
-export { AppContext, AppProvider };
+export { LoginContext, LoginProvider };

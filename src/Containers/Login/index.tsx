@@ -7,7 +7,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import ROUTES from 'consts';
 
 // Context
-import { AppContext } from 'Contexts/app';
+import { LoginContext } from 'Contexts/login';
 
 // APIS
 import UserAPI from 'Apis/user';
@@ -31,7 +31,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Container Login
 const Login = () => {
   // Attributes
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(LoginContext);
   const [loginData, setLoginData] = useState<{
     user: string;
     pass: string;

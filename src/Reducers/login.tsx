@@ -1,7 +1,7 @@
-import { App } from 'Interfaces/app';
+import { Login } from 'Interfaces/login';
 import { Action } from 'Types/action';
 
-export const AppReducer = (state: App, action: Action) => {
+export const LoginReducer = (state: Login, action: Action) => {
   switch (action.type) {
     case 'DO_LOGIN': {
       window.localStorage.setItem(
@@ -22,7 +22,7 @@ export const AppReducer = (state: App, action: Action) => {
     }
 
     default: {
-      throw new Error(`Unknown type ${action.type} reducer on AppReducer`);
+      throw new Error(`Unknown type ${action.type} reducer on LoginReducer`);
     }
   }
 };

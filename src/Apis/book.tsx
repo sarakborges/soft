@@ -1,4 +1,8 @@
+// Interfaces
 import { Book } from 'Interfaces/book';
+
+// Constants
+import { booksMock } from 'consts';
 
 const getBooks = async ({
   currentPage,
@@ -9,94 +13,54 @@ const getBooks = async ({
   pageSize?: number;
   filter?: string;
 }) => {
-  const booksMock: Array<Book> = [
-    {
-      id: 1,
-      name: 'Harry Potter e a Pedra Filosofal',
-      isRented: false,
-    },
+  const minCount = currentPage * pageSize - pageSize;
+  const maxCount = currentPage * pageSize;
 
-    {
-      id: 2,
-      name: 'Harry Potter e a Câmara Secreta',
-      isRented: false,
-    },
-
-    {
-      id: 3,
-      name: 'Harry Potter e o Prisioneiro de Azkaban',
-      isRented: false,
-    },
-
-    {
-      id: 4,
-      name: 'Harry Potter e o Cálice de Fogo',
-      isRented: false,
-    },
-
-    {
-      id: 5,
-      name: 'Harry Potter e a Ordem da Fênix',
-      isRented: false,
-    },
-
-    {
-      id: 6,
-      name: 'Harry Potter e o Príncipe Mestiço',
-      isRented: false,
-    },
-
-    {
-      id: 7,
-      name: 'Harry Potter e as Relíquias da Morte',
-      isRented: false,
-    },
-
-    {
-      id: 8,
-      name: 'Crônicas de Gelo e Fogo',
-      isRented: false,
-    },
-
-    {
-      id: 9,
-      name: 'A Batalha do Apocalipse',
-      isRented: false,
-    },
-
-    {
-      id: 10,
-      name: 'Hobbit',
-      isRented: false,
-    },
-  ];
+  let quantityCount = 0;
 
   const booksFiltered: Array<Book | undefined> = !!filter
-    ? booksMock.filter(
-        bookItem =>
-          !!filter && bookItem.name.toLocaleLowerCase().includes(filter.trim()),
-      )
-    : booksMock;
-
-  const finalBooks: Array<Book | undefined> = booksFiltered.filter(
-    (bookItem, bookItemKey) =>
-      bookItemKey >= currentPage * pageSize - pageSize &&
-      bookItemKey < currentPage * pageSize,
-  );
+    ? booksMock
+        .flat()
+        .filter(
+          bookItem =>
+            !!filter &&
+            bookItem.name.toLocaleLowerCase().includes(filter.trim()),
+        )
+    : booksMock.flat();
 
   const booksList: {
     totalPages: number;
     results: Array<Book | undefined>;
   } = {
     totalPages: Math.ceil(booksFiltered.length / pageSize),
-    results: finalBooks,
+    results: booksFiltered.filter((bookItem, bookItemIndex) => {
+      if (
+        quantityCount < maxCount &&
+        bookItemIndex >= minCount &&
+        bookItemIndex < maxCount
+      ) {
+        quantityCount++;
+        return true;
+      } else {
+        return false;
+      }
+    }),
   };
 
   return booksList || false;
 };
 
+const deleteBook = async (id: number) => {
+  booksMock.forEach((bookItem, bookItemIndex) => {
+    if (bookItem.id === id) {
+      delete booksMock[bookItemIndex];
+    }
+  });
+};
+
 const BookAPI = {
   getBooks,
+  deleteBook,
 };
 
 export default BookAPI;

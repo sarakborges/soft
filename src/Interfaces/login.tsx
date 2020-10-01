@@ -1,4 +1,4 @@
-export interface App {
+export interface Login {
   isAuthed: boolean;
   token: string;
   user:
