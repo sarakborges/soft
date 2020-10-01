@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 // Styles
-import { FieldWrapper, Label, FieldStyle } from './style';
+import { FieldWrapper, Label, FieldStyle, FieldTextAreaStyle } from './style';
 
 // Component Field
 const Field = ({
@@ -28,7 +28,7 @@ const Field = ({
 }) => {
   return (
     <FieldWrapper>
-      {!!label && !!name && (
+      {!!label && !!name && type !== 'select' && type !== 'textarea' && (
         <Label htmlFor={name}>
           <FontAwesomeIcon icon={label} />
         </Label>
@@ -38,6 +38,15 @@ const Field = ({
         <FieldStyle
           id={name}
           type={type || 'text'}
+          placeholder={placeholder || 'Digite aqui'}
+          value={value}
+          onChange={onChange}
+        />
+      )}
+
+      {type === 'textarea' && (
+        <FieldTextAreaStyle
+          id={name}
           placeholder={placeholder || 'Digite aqui'}
           value={value}
           onChange={onChange}

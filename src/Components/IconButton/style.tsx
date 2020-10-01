@@ -31,12 +31,15 @@ export const IconButtonStyle = styled.button`
     cursor: default;
   }
 
-  a {
-    text-decoration: none;
-    color: inherit;
+  @media (max-width: 460px) {
+    font-size: 13px;
   }
 `;
 
 export const IconButtonText = styled.span`
   padding-left: 10px;
+
+  @media (max-width: 460px) {
+    padding-left: 7px;
+  }
 `;

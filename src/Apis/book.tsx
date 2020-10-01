@@ -28,12 +28,23 @@ const getBooks = async ({
         )
     : booksMock.flat();
 
+  const booksOrdered = booksFiltered.sort((a, b) => {
+    const aName: string = a?.name.toLocaleLowerCase()!;
+    const bName: string = b?.name.toLocaleLowerCase()!;
+
+    if (aName < bName) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+
   const booksList: {
     totalPages: number;
     results: Array<Book | undefined>;
   } = {
-    totalPages: Math.ceil(booksFiltered.length / pageSize),
-    results: booksFiltered.filter((bookItem, bookItemIndex) => {
+    totalPages: Math.ceil(booksOrdered.length / pageSize),
+    results: booksOrdered.filter((bookItem, bookItemIndex) => {
       if (
         quantityCount < maxCount &&
         bookItemIndex >= minCount &&
@@ -50,8 +61,21 @@ const getBooks = async ({
   return booksList || false;
 };
 
-const editBook = async (id: number, bookInfo: Book) => {
-  const bookIndex = booksMock.flat().findIndex(bookItem => bookItem.id === id);
+const getBook = async (id: string) => {
+  return booksMock.flat().find(bookItem => bookItem.id === parseInt(id));
+};
+
+const createBook = async (bookInfo: Book) => {
+  booksMock.push({
+    ...bookInfo,
+    id: booksMock.flat()[booksMock.flat().length - 1].id + 1,
+  });
+};
+
+const editBook = async (id: string, bookInfo: Book) => {
+  const bookIndex = booksMock
+    .flat()
+    .findIndex(bookItem => bookItem.id === parseInt(id));
 
   if (!!bookIndex) {
     booksMock[bookIndex] = { ...bookInfo };
@@ -76,6 +100,8 @@ const toggleRentBook = async (id: number) => {
 
 const BookAPI = {
   getBooks,
+  getBook,
+  createBook,
   editBook,
   deleteBook,
   toggleRentBook,

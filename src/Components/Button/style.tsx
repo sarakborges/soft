@@ -40,4 +40,11 @@ export const ButtonStyle = styled.button<Props>`
 
     cursor: default;
   }
+
+  @media (max-width: 500px) {
+    height: 40px;
+    width: ${props =>
+      props.fullWidth ? '100%' : props.square ? '40px' : 'auto'};
+    padding: ${props => (props.square ? '0' : '0 20px')};
+  }
 `;

@@ -25,7 +25,22 @@ export const BooksListItem = styled.li`
 `;
 
 export const BookTitle = styled.div`
+  flex: 1;
+  padding-right: 15px;
+
   font-size: 16px;
+
+  > a {
+    color: ${Theme.main};
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 500px) {
+    font-size: 14px;
+  }
 `;
 
 export const BookOptions = styled.div`
@@ -34,5 +49,9 @@ export const BookOptions = styled.div`
 
   > button:not(:last-of-type) {
     margin-right: 10px;
+
+    @media (max-width: 500px) {
+      margin-right: 5px;
+    }
   }
 `;

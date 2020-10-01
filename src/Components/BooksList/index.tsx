@@ -103,7 +103,11 @@ const BooksList = () => {
         {results.map(bookItem => {
           return (
             <BooksListItem key={`book-item-${bookItem?.id}`}>
-              <BookTitle>{bookItem?.name}</BookTitle>
+              <BookTitle>
+                <Link to={ROUTES.DETAILS.url.replace(':id', `${bookItem?.id}`)}>
+                  {bookItem?.name}
+                </Link>
+              </BookTitle>
 
               <BookOptions>
                 <IconButton
@@ -115,11 +119,11 @@ const BooksList = () => {
                   {bookItem?.isRented ? 'Devolver' : 'Alugar'}
                 </IconButton>
 
-                <IconButton icon={faPencilAlt} disabled={bookItem?.isRented}>
-                  <Link to={ROUTES.EDIT.url.replace(':id', `${bookItem?.id}`)}>
+                <Link to={ROUTES.EDIT.url.replace(':id', `${bookItem?.id}`)}>
+                  <IconButton icon={faPencilAlt} disabled={bookItem?.isRented}>
                     Editar
-                  </Link>
-                </IconButton>
+                  </IconButton>
+                </Link>
 
                 <IconButton
                   icon={faTimes}

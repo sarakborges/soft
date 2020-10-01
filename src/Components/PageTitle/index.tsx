@@ -5,7 +5,7 @@ import React from 'react';
 import { PageTitleStyle } from './style';
 
 // Component PageTitle
-const PageTitle = ({ children }: { children: string }) => {
+const PageTitle = ({ children }: { children: any }) => {
   // DOM
   return <PageTitleStyle>{children}</PageTitleStyle>;
 };

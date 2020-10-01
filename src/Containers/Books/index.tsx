@@ -1,6 +1,7 @@
 // Dependencies
 import React, { useContext } from 'react';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 // Contexts
 import { BooksListContext, BooksListProvider } from 'Contexts/booksList';
@@ -8,10 +9,12 @@ import { BooksListContext, BooksListProvider } from 'Contexts/booksList';
 // Components
 import PageTitle from 'Components/PageTitle';
 import Field from 'Components/Field';
+import IconButton from 'Components/IconButton';
 import BooksList from 'Components/BooksList';
 
 // Styles
-import { BooksListStyle, BooksListFilter } from './style';
+import { BooksListStyle, BooksListTitle, BooksListFilter } from './style';
+import ROUTES from 'consts';
 
 // Container BooksList
 const Books = () => {
@@ -32,7 +35,13 @@ const Books = () => {
   // DOM
   return (
     <BooksListStyle>
-      <PageTitle>Encontre seu livro favorito aqui!</PageTitle>
+      <BooksListTitle>
+        <PageTitle>Encontre seu livro favorito aqui!</PageTitle>
+
+        <Link to={ROUTES.CREATE.url}>
+          <IconButton icon={faPlus}>Inserir novo livro</IconButton>
+        </Link>
+      </BooksListTitle>
 
       <BooksListFilter>
         <Field
@@ -49,8 +58,12 @@ const Books = () => {
   );
 };
 
-export default () => (
-  <BooksListProvider>
-    <Books />
-  </BooksListProvider>
-);
+const BooksWrapper = () => {
+  return (
+    <BooksListProvider>
+      <Books />
+    </BooksListProvider>
+  );
+};
+
+export default BooksWrapper;
